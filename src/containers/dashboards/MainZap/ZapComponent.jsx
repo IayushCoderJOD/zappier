@@ -46,10 +46,14 @@ const ZapComponent = () => {
         const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
         const type = event.dataTransfer.getData("application/reactflow");
 
-        const position = reactFlowInstance.project({
+        const position =reactFlowInstance.project?({
             x: event.clientX - reactFlowBounds.left,
             y: event.clientY - reactFlowBounds.top,
-        });
+        }):({
+            x:200,y:200
+        },{
+            x:200,y:200
+        })
 
 
 

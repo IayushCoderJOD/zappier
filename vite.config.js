@@ -9,11 +9,11 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [react()],
   preview: {
-    port: 80,
+    port: 8080,
     host: true,
   },
   server: {
-    port: 80,
+    port: 8080,
     host: true,
     allowedHosts: ['zapier.dev.com'],
   },
