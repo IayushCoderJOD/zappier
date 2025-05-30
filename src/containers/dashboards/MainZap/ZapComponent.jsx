@@ -10,6 +10,8 @@ import {
 import "@xyflow/react/dist/style.css";
 import React, { useCallback, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { ZapSidebar } from "../../components/ZapSidebar";
+import CustomNode from "./CustomNode";
 
 
 let id = 0;
@@ -44,8 +46,9 @@ const ZapComponent = () => {
     const onDrop = (event) => {
         event.preventDefault();
         const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-        const type = event.dataTransfer.getData("application/reactflow");
-
+        const label = event.dataTransfer.getData("application/reactflow");
+        console.log(label,event.dataTransfer)
+        const type = "default";
         const position =reactFlowInstance.project?({
             x: event.clientX - reactFlowBounds.left,
             y: event.clientY - reactFlowBounds.top,
@@ -61,8 +64,8 @@ const ZapComponent = () => {
             id: getId(),
             type,
             position,
-            data: { label: `${type} node` },
-        };
+            data: { label },
+          };
 
         setNodes((nds) => [...nds, newNode]);
     };
@@ -72,29 +75,7 @@ const ZapComponent = () => {
     return (
         <Container fluid style={{ height: "100vh", padding: "20px" }}>
             <Row>
-                {/* Sidebar */}
-                <Col md={3}>
-                    <div style={{ padding: 10, border: "1px solid #ddd" }}>
-                        <h5>Drag a node</h5>
-                        <div
-                            style={{
-                                border: "1px dashed gray",
-                                padding: "8px",
-                                marginBottom: "10px",
-                                cursor: "grab",
-                                background: "#fff",
-                                textAlign: "center",
-                            }}
-                            draggable
-                            onDragStart={(event) =>
-                                event.dataTransfer.setData("application/reactflow", "default")
-                            }
-                        >
-                            Default Node
-                        </div>
-                    </div>
-                </Col>
-
+                <ZapSidebar onNodeDragStart={(node) => console.log("Dragged:", node)} />
                 <Col md={9}>
                     <div
                         ref={reactFlowWrapper}
@@ -109,6 +90,7 @@ const ZapComponent = () => {
                             onConnect={onConnect}
                             onEdgesChange={onEdgesChange}
                             fitView
+                            nodeTypes={{ default: CustomNode }} 
                         >
                             <Controls />
                             <Background />

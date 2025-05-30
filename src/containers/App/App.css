@@ -1,3 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.react-flow__node-default {
+    border: none !important; /* remove default border */
+    background: transparent !important; /* optional */
+    box-shadow: none !important; /* optional */
+  }
