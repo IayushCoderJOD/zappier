@@ -2,40 +2,43 @@
 import {
   FaHome, FaMagic, FaCogs, FaTh, FaBoxOpen, FaWrench,
   FaMicrosoft,
+  FaExpandArrowsAlt,
 } from "react-icons/fa";
 import {
   SiGooglesheets, SiGmail, SiSlack, SiGooglecalendar, SiGoogledrive,
   SiNotion, SiHubspot, SiGoogleforms, SiMailchimp,
   SiTypeform,
 } from "react-icons/si";
-import { FaFacebook } from "react-icons/fa";
-import { SiCalendly } from "react-icons/si";
 
-
-export const appsList = [
-    { label: "Google Sheets", icon: <SiGooglesheets /> },
-    { label: "Gmail", icon: <SiGmail /> },
-    { label: "Slack", icon: <SiSlack /> },
-    { label: "Google Calendar", icon: <SiGooglecalendar /> },
-    { label: "Google Drive", icon: <SiGoogledrive /> },
-    { label: "Notion", icon: <SiNotion /> },
-    { label: "HubSpot", icon: <SiHubspot /> },
-    { label: "Google Forms", icon: <SiGoogleforms /> },
-    { label: "Mailchimp", icon: <SiMailchimp /> },
-    { label: "Facebook Lead Ads", icon: <FaFacebook />, disabled: true },
-    { label: "Calendly", icon: <SiCalendly /> },
-    { label: "Typeform", icon: <SiTypeform /> },
-    { label: "Microsoft Outlook", icon: <FaMicrosoft /> },
+  export const appsList = [
+    {
+      label: "Gmail",
+      icon: <SiGmail />,
+      type: "gmailNode", // custom node type
+      description: "New email received",
+    },
+    {
+      label: "Slack",
+      icon: <SiSlack />,
+      type: "slackNode",
+      description: "New message in Slack",
+    },
+    {
+      label: "Google Calendar",
+      icon: <SiGooglecalendar />,
+      type: "calendarNode",
+      description: "New calendar event",
+    },
+    { label: "Webhook", icon: <FaExpandArrowsAlt /> ,
+      type: "webhookNode",
+      description: "New Webhook event",},
   ];
-
+  
 
 
   export const sidebarMenu = [
     { label: "Home", icon: <FaHome /> },
     { label: "Apps", icon: <FaTh /> },
-    { label: "AI", icon: <FaMagic /> },
-    { label: "Flow controls", icon: <FaCogs /> },
-    { label: "Utilities", icon: <FaWrench /> },
     { label: "Products", icon: <FaBoxOpen /> },
     { label: "Custom", icon: <FaWrench /> },
   ];

@@ -3,3 +3,57 @@
     background: transparent !important; /* optional */
     box-shadow: none !important; /* optional */
   }
+
+  .node-box {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    position: relative;
+  }
+  
+  .node-white {
+    background-color: white;
+    border: 1px solid black;
+  }
+  
+  .node-dark {
+    background-color: #1c0b47;
+    border: 1px solid white;
+    color: white;
+  }
+  
+  .node-header {
+    background-color: #430a89;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding: 4px;
+    border-radius: 3px;
+    color: white;
+  }
+  
+  .node-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .node-input,
+  .node-select {
+    width: 100%;
+    padding: 4px 6px;
+    margin-top: 4px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  .node-header {
+    background-color: #430a89;
+  }
+  
+  .node-content {
+    color: white;
+  }

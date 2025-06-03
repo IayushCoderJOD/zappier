@@ -12,6 +12,8 @@ import React, { useCallback, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { ZapSidebar } from "../../components/ZapSidebar";
 import CustomNode from "./CustomNode";
+import GmailNode from "../Nodes/GmailNode";
+import Slack from "../Nodes/Slack";
 
 
 let id = 0;
@@ -19,10 +21,14 @@ const getId = () => `${id++}`;
 
 const ZapComponent = () => {
     const reactFlowWrapper = useRef(null);
-    const reactFlowInstance = useReactFlow();
     const [nodes, setNodes] = useState([]);
     const [edges, setEdges] = useState([]);
 
+    const nodeTypes = {
+        gmailNode: GmailNode,
+        slackNode: Slack,
+        // calendarNode: CalendarNode,
+      };
     const onConnect = useCallback(
         (params) => setEdges((eds) => addEdge(params, eds)),
         []
@@ -45,31 +51,28 @@ const ZapComponent = () => {
 
     const onDrop = (event) => {
         event.preventDefault();
-        const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-        const label = event.dataTransfer.getData("application/reactflow");
-        console.log(label,event.dataTransfer)
-        const type = "default";
-        const position =reactFlowInstance.project?({
-            x: event.clientX - reactFlowBounds.left,
-            y: event.clientY - reactFlowBounds.top,
-        }):({
-            x:200,y:200
-        },{
-            x:200,y:200
-        })
-
-
-
+        const appData = JSON.parse(event.dataTransfer.getData("application/reactflow"));
+        const position = {
+          x: event.clientX - 250, 
+          y: event.clientY - 40,
+        };
+      
         const newNode = {
-            id: getId(),
-            type,
-            position,
-            data: { label },
-          };
+          id: `${+new Date()}`,
+          type: appData.type, 
+          position,
+          data: {
+            label: appData.label,
+            icon: appData.icon,
+            description: appData.description,
+          },
+        };
+      
+        setNodes((nds) => nds.concat(newNode));
+      };
 
-        setNodes((nds) => [...nds, newNode]);
-    };
 
+      console.log("this is the nodes ",nodes+" , and edges " +edges)
 
 
     return (
@@ -90,7 +93,7 @@ const ZapComponent = () => {
                             onConnect={onConnect}
                             onEdgesChange={onEdgesChange}
                             fitView
-                            nodeTypes={{ default: CustomNode }} 
+                            nodeTypes={nodeTypes} 
                         >
                             <Controls />
                             <Background />

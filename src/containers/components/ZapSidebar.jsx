@@ -7,11 +7,12 @@ export const ZapSidebar = ({ onNodeDragStart }) => {
   const [activeTab, setActiveTab] = useState("Home");
 
   const handleDragStart = (event, app) => {
-    event.dataTransfer.setData("application/reactflow", app.label);
+    event.dataTransfer.setData("application/reactflow", JSON.stringify(app)); 
     if (onNodeDragStart) {
       onNodeDragStart(app);
     }
   };
+  
 
   return (
     <Col
@@ -46,7 +47,6 @@ export const ZapSidebar = ({ onNodeDragStart }) => {
               <span>{item.label}</span>
             </div>
 
-            {/* Show app list when "Apps" tab is active */}
             {item.label === "Apps" && activeTab === "Apps" && (
               <div style={{ paddingLeft: 12 }}>
                 {appsList.map((app, idx) => (
